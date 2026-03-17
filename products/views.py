@@ -9,6 +9,9 @@ from .serializers import (
     ProductDetailSerializer,
     CategoryListSeializers,
     CategoryDetailSeializers,
+    CategoryValidateSerializer,
+    ProductValidateSerializer,
+    ReviewValidateSerializer
 )
 from .models import Category,Product,Review
 
@@ -20,7 +23,10 @@ def category_list_api_view(req):
         return Response(status=status.HTTP_200_OK,
                         data=data)
     elif req.method == 'POST':
-        name = req.data.get('name')
+        serializer = CategoryValidateSerializer(data=req.data)
+        serializer.is_valid(raise_exception=True)
+
+        name = serializer.validated_data.get('name')
 
         category = Category.objects.create(
             name=name
@@ -52,16 +58,20 @@ def category_detail_api_view(req,id):
 
 @api_view(['GET','POST'])
 def product_list_api_view(req):
+    
     if req.method == 'GET':
         products = Product.objects.all()
         data = ProductListSerializer(products,many=True).data
         return Response(status=status.HTTP_200_OK,
                         data=data)
     elif req.method == 'POST':
-        title = req.data.get('title')
-        description = req.data.get('description')
-        price = req.data.get('price')
-        category_id = req.data.get('category_id')
+        serializer = ProductValidateSerializer(data=req.data)
+        serializer.is_valid(raise_exception=True)
+
+        title = serializer.validated_data.get('title')
+        description = serializer.validated_data.get('description')
+        price = serializer.validated_data.get('price')
+        category_id = serializer.validated_data.get('category_id')
 
         product = Product.objects.create(
             title=title,
@@ -103,9 +113,12 @@ def reviews_list_api_view(req):
         return Response(status=status.HTTP_200_OK,
                         data=data)
     elif req.method == 'POST':
-        text = req.data.get('text')
-        product_id = req.data.get('product_id')
-        stars = req.data.get('stars')
+        serializer = ReviewValidateSerializer(data=req.data)
+        serializer.is_valid(raise_exception=True)
+
+        text = serializer.validated_data.get('text')
+        product_id = serializer.validated_data.get('product_id')
+        stars = serializer.validated_data.get('stars')
 
         review = Review.objects.create(
             text=text,
