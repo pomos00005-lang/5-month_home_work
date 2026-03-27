@@ -24,5 +24,7 @@ urlpatterns = [
     path('api/v1/products/reviews/',views.reviews_list_api_view),
     path('api/v1/products/reviews/<int:id>/',views.review_detail_api_view),
 
+    path('api/v1/user/',include('user.urls')),
+    
     path('api/v2/',include(router.urls)),
 ]
