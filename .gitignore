@@ -1,0 +1,65 @@
+# 🔥 Python
+
+**pycache**/
+*.py[cod]
+*$py.class
+
+# 🔥 Virtual environment
+
+venv/
+.env/
+.venv/
+
+# 🔥 Django
+
+*.log
+*.pot
+*.pyc
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+
+# 🔥 Environment variables
+
+.env
+.env.*
+
+# 🔥 IDE / Editor
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 🔥 OS files
+
+.DS_Store
+Thumbs.db
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 🔥 MyPy
+
+.mypy_cache/
+
+# 🔥 Node (если вдруг фронт есть)
+
+node_modules/
+
+# 🔥 Docker
+
+*.env
+docker-compose.override.yml
+
+# 🔥 Logs
+
+logs/
+*.log
+
+# 🔥 Secrets
+
+secrets.json
+*.pem
